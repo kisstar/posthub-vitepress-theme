@@ -1,0 +1,33 @@
+{
+  "name": "posthub-vitepress-theme",
+  "version": "0.0.1",
+  "description": "A blog theme based on vitepress.",
+  "keywords": [
+    "vitepress",
+    "theme",
+    "blog",
+    "posthub"
+  ],
+  "main": "src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "files": [
+    "src"
+  ],
+  "devDependencies": {
+    "vitepress": "^1.0.0-rc.24",
+    "vue": "^3.3.7"
+  },
+  "peerDependencies": {
+    "vitepress": "^1.0.0-rc.24"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kisstar/posthub-vitepress-theme.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kisstar/posthub-vitepress-theme/issues"
+  },
+  "author": "kisstar"
+}
