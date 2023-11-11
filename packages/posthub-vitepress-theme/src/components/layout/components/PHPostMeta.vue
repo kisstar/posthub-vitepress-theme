@@ -105,7 +105,7 @@ defineProps<{ postMeta: PostMeta }>();
   border-bottom: 0.8rem solid;
   border-left: 0.6rem solid;
   content: '';
-  background: #fff;
+  background: var(--vp-c-bg);
   border-bottom-color: transparent;
   border-left-color: var(--vp-c-bg-soft);
   border-top-color: transparent;

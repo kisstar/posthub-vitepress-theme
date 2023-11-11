@@ -27,6 +27,7 @@ const { frontmatter } = useData();
 }
 
 .ph-home-aside {
+  position: relative;
   margin-top: 1rem;
   width: 278px;
 }

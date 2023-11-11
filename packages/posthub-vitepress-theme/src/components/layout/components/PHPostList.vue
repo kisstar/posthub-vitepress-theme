@@ -71,6 +71,7 @@ defineProps<PostList>();
 .ph-post-excerpt {
   margin-top: 0.8rem;
   font-size: 14px;
+  color: var(--vp-c-text-2);
 }
 
 .ph-post-footer {
@@ -78,6 +79,7 @@ defineProps<PostList>();
   align-items: center;
   margin-top: 1rem;
   font-size: 14px;
+  color: var(--vp-c-text-2);
 }
 
 /* 时间和标签图标 */
