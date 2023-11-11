@@ -20,16 +20,16 @@ defineProps<{ authorInfo: AuthorInfo }>();
   <div class="ph-author">
     <img
       v-if="authorInfo.avatar"
-      class="ph-author-avatar"
+      class="ph-author__avatar"
       width="110"
       height="110"
       alt="avatar"
       :src="withBase(authorInfo.avatar)"
     />
-    <p class="ph-author-name">{{ authorInfo.author }}</p>
-    <p class="ph-author-description">{{ authorInfo.description }}</p>
-    <ul class="ph-author-urls">
-      <li v-for="url in authorInfo.urls" :key="url.text" class="ph-author-url">
+    <p class="ph-author__name">{{ authorInfo.author }}</p>
+    <p class="ph-author__description">{{ authorInfo.description }}</p>
+    <ul class="ph-author__urls">
+      <li v-for="url in authorInfo.urls" :key="url.text" class="ph-author__url">
         <a v-if="url.link" :href="url.link" target="_blank">
           {{ url.text }}
         </a>
@@ -45,21 +45,21 @@ defineProps<{ authorInfo: AuthorInfo }>();
   top: 79px; /* 导航栏高度 + 侧边栏上外边距 */
 }
 
-.ph-author-name {
+.ph-author__name {
   margin-top: 10px;
   font-weight: bold;
   font-size: 1em;
 }
 
-.ph-author-avatar {
+.ph-author__avatar {
   border-radius: 50%;
 }
 
-.ph-author-description {
+.ph-author__description {
   margin-top: 10px;
 }
 
-.ph-author-urls {
+.ph-author__urls {
   margin-top: 10px;
 }
 </style>

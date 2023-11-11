@@ -1,0 +1,25 @@
+/**
+ * Basic
+ * -------------------------------------------------------------------------- */
+:root {
+  --ph-layout-max-width: var(--vp-layout-max-width);
+}
+
+/**
+ * Component: PHPostList
+ * -------------------------------------------------------------------------- */
+:root {
+  --ph-post-list-title-hover-text: var(--vp-c-brand-1);
+  --ph-post-list-excerpt-text: var(--vp-c-text-2);
+  --ph-post-list-footer-text: var(--vp-c-text-2);
+}
+
+/**
+ * Component: PHPostMeta
+ * -------------------------------------------------------------------------- */
+:root {
+  --ph-post-meta-tag-bg: var(--vp-c-bg-soft);
+  --ph-post-meta-tag-text: var(--vp-c-text-2);
+  --ph-post-meta-tag-pseudo-bg: var(--vp-c-bg);
+  --ph-post-meta-tag-pseudo-border: var(--vp-c-bg-soft);
+}

@@ -8,31 +8,33 @@ const { frontmatter } = useData();
 </script>
 
 <template>
-  <main class="ph-container">
-    <aside class="ph-home-aside">
+  <main class="ph-home__container">
+    <aside class="ph-home__aside">
       <PHAuthorInfo :author-info="frontmatter"></PHAuthorInfo>
     </aside>
-    <section class="ph-home-section">
+    <section class="ph-home__section">
       <PHPostList :posts="posts"></PHPostList>
     </section>
   </main>
 </template>
 
 <style>
-.ph-container {
+@import '../../styles/vars.css';
+
+.ph-home__container {
   display: flex;
   margin: 0 auto;
   padding: 0 32px;
-  max-width: var(--vp-layout-max-width);
+  max-width: var(--ph-layout-max-width);
 }
 
-.ph-home-aside {
+.ph-home__aside {
   position: relative;
   margin-top: 1rem;
   width: 278px;
 }
 
-.ph-home-section {
+.ph-home__section {
   flex: 1;
 }
 </style>
