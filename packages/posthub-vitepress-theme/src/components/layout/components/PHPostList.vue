@@ -13,11 +13,11 @@ interface PostInfo {
   submitTime: string;
 }
 
-interface PostListProps {
+interface PostList {
   posts: PostInfo[];
 }
 
-defineProps<PostListProps>();
+defineProps<PostList>();
 </script>
 
 <template>
@@ -41,7 +41,7 @@ defineProps<PostListProps>();
           {{ post.author }} 发表于 {{ post.submitTime }}
           <PHTag></PHTag>
           <template v-for="(tag, index) in post.tags" :key="tag">
-            <span v-if="index > 0">/</span>
+            <span v-if="index > 0" class="ph-post-tag-divider">/</span>
             <span>{{ tag }}</span>
           </template>
         </p>
@@ -80,6 +80,7 @@ defineProps<PostListProps>();
   font-size: 14px;
 }
 
+/* 时间和标签图标 */
 .ph-post-footer svg {
   margin-right: 0.3rem;
   width: 0.875rem;
@@ -88,5 +89,9 @@ defineProps<PostListProps>();
 
 .ph-post-footer svg:nth-child(2) {
   margin-left: 1rem;
+}
+
+.ph-post-tag-divider {
+  margin: 0 0.3rem;
 }
 </style>
