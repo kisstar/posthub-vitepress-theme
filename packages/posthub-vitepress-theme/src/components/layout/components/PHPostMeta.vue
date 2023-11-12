@@ -29,8 +29,14 @@ defineProps<{ postMeta: PostMeta }>();
     </div>
     <ul class="ph-post-meta__tags">
       <li v-for="tag in postMeta.tags" :key="tag" class="ph-post-meta__tag">
-        <!-- TODO: 提供标签跳转落地页 -->
-        <a href="javascript:void(0)">{{ tag }}</a>
+        <!-- TODO: 提供标签跳转落地页
+        <a class="ph-post-meta__tag-item" href="javascript:void(0)">
+        {{ tag }}
+        </a>
+        -->
+        <span class="ph-post-meta__tag-item">
+          {{ tag }}
+        </span>
       </li>
     </ul>
   </div>
@@ -77,7 +83,7 @@ defineProps<{ postMeta: PostMeta }>();
   margin-right: 0.5rem;
 }
 
-.ph-post-meta__tag a {
+.ph-post-meta__tag-item {
   position: relative;
   display: inline-block;
   height: 1.5rem;
@@ -88,7 +94,7 @@ defineProps<{ postMeta: PostMeta }>();
   color: var(--ph-post-meta-tag-text);
 }
 
-.ph-post-meta__tag a::before {
+.ph-post-meta__tag-item::before {
   position: absolute;
   top: 0.6rem;
   left: 0.6rem;
@@ -99,7 +105,7 @@ defineProps<{ postMeta: PostMeta }>();
   background: var(--ph-post-meta-tag-pseudo-bg);
 }
 
-.ph-post-meta__tag a::after {
+.ph-post-meta__tag-item::after {
   position: absolute;
   top: 0;
   right: 0;

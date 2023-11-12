@@ -66,6 +66,10 @@ defineProps<PostList>();
   box-shadow: 0 30px 90px rgba(0, 0, 0, 0.4);
 }
 
+.ph-post__title {
+  color: var(--ph-post-list-title-text);
+}
+
 .ph-post__title:hover {
   color: var(--ph-post-list-title-hover-text);
 }
