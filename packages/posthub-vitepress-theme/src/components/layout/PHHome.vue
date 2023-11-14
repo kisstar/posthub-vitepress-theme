@@ -1,16 +1,29 @@
 <script setup lang="ts">
+import { computed, type ComputedRef } from 'vue';
 import { useData } from 'vitepress';
-import PHAuthorInfo from './components/PHAuthorInfo.vue';
+import PHAuthorInfo, { type FilterInfo } from './components/PHAuthorInfo.vue';
 import PHPostList from './components/PHPostList.vue';
 import { data as posts } from './posts.data';
 
-const { frontmatter } = useData();
+const { frontmatter, site } = useData();
+const filterInfo: ComputedRef<FilterInfo> = computed(() => {
+  const themeConfig = site.value.themeConfig;
+  const { categroyInfo = {}, tagInfo = {} } = themeConfig;
+
+  return {
+    categroyCount: Object.keys(categroyInfo).length,
+    tagCount: Object.keys(tagInfo).length,
+  };
+});
 </script>
 
 <template>
   <main class="ph-home__container">
     <aside class="ph-home__aside">
-      <PHAuthorInfo :author-info="frontmatter"></PHAuthorInfo>
+      <PHAuthorInfo
+        :author-info="frontmatter"
+        :filter-info="filterInfo"
+      ></PHAuthorInfo>
     </aside>
     <section class="ph-home__section">
       <PHPostList :posts="posts"></PHPostList>
@@ -31,6 +44,7 @@ const { frontmatter } = useData();
 .ph-home__aside {
   position: relative;
   margin-top: 1rem;
+  padding-right: 2rem;
   width: 278px;
 }
 

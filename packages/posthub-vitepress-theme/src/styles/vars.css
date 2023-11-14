@@ -10,6 +10,7 @@
  * -------------------------------------------------------------------------- */
 :root {
   --ph-author-info-link-hover-text: var(--vp-c-brand-2);
+  --ph-author-info-filter-border: var(--vp-c-border);
 }
 
 /**

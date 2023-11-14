@@ -15,7 +15,12 @@ interface AuthorInfo {
   urls?: AuthorInfoUrl[];
 }
 
-defineProps<{ authorInfo: AuthorInfo }>();
+export interface FilterInfo {
+  categroyCount: number;
+  tagCount: number;
+}
+
+defineProps<{ authorInfo: AuthorInfo; filterInfo: FilterInfo }>();
 </script>
 
 <template>
@@ -30,6 +35,19 @@ defineProps<{ authorInfo: AuthorInfo }>();
     />
     <p class="ph-author__name">{{ authorInfo.author }}</p>
     <p class="ph-author__description">{{ authorInfo.description }}</p>
+    <!-- 分类详情 -->
+    <div class="ph-author__filter">
+      <button class="ph-author__categroy">
+        分类
+        <br />
+        {{ filterInfo.categroyCount }}
+      </button>
+      <button class="ph-author__tag">
+        标签
+        <br />
+        {{ filterInfo.tagCount }}
+      </button>
+    </div>
     <!-- 链接列表 -->
     <ul class="ph-author__urls">
       <li v-for="url in authorInfo.urls" :key="url.text" class="ph-author__url">
@@ -62,6 +80,25 @@ defineProps<{ authorInfo: AuthorInfo }>();
 
 .ph-author__description {
   margin-top: 10px;
+}
+
+.ph-author__filter {
+  display: flex;
+  margin-top: 1rem;
+  padding: 0 20px;
+  width: 55%;
+  border-top: 1px solid var(--ph-author-info-filter-border);
+  border-bottom: 1px solid var(--ph-author-info-filter-border);
+}
+
+.ph-author__categroy,
+.ph-author__tag {
+  text-align: center;
+  font-size: 14px;
+}
+
+.ph-author__tag {
+  margin-left: 2rem;
 }
 
 .ph-author__urls {
