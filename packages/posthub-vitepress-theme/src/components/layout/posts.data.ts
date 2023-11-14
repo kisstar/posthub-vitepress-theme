@@ -1,4 +1,5 @@
 import { createContentLoader } from 'vitepress';
+import { transformToRealURL } from '../../utils';
 
 export default createContentLoader('posts/**/*.md', {
   transform(raw) {
@@ -8,7 +9,7 @@ export default createContentLoader('posts/**/*.md', {
 
         return {
           ...frontmatter,
-          url,
+          url: transformToRealURL(url),
           timestamp: date.getTime(),
           submitTime: date.toLocaleDateString().replace(/\//g, '-'),
         };
