@@ -3,6 +3,7 @@
  * -------------------------------------------------------------------------- */
 :root {
   --ph-layout-max-width: var(--vp-layout-max-width);
+  --ph-layout-aside-width: 278px;
 }
 
 /**
@@ -31,4 +32,11 @@
   --ph-post-meta-tag-text: var(--vp-c-text-2);
   --ph-post-meta-tag-pseudo-bg: var(--vp-c-bg);
   --ph-post-meta-tag-pseudo-border: var(--vp-c-bg-soft);
+}
+
+/**
+ * Component: PHPostMeta
+ * -------------------------------------------------------------------------- */
+:root {
+  --ph-tag-des-text: var(--vp-c-text-2);
 }

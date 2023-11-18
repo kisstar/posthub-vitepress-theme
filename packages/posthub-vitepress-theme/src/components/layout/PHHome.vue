@@ -3,7 +3,7 @@ import { computed, type ComputedRef } from 'vue';
 import { useData } from 'vitepress';
 import PHAuthorInfo, { type FilterInfo } from './components/PHAuthorInfo.vue';
 import PHPostList from './components/PHPostList.vue';
-import { data as posts } from './posts.data';
+import { postData as posts } from '../../store';
 
 const { frontmatter, site } = useData();
 const filterInfo: ComputedRef<FilterInfo> = computed(() => {
@@ -45,7 +45,7 @@ const filterInfo: ComputedRef<FilterInfo> = computed(() => {
   position: relative;
   margin-top: 1rem;
   padding-right: 2rem;
-  width: 278px;
+  width: var(--ph-layout-aside-width);
 }
 
 .ph-home__section {

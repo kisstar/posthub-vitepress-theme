@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import PHTime from '../../icons/PHTime.vue';
 import PHTag from '../../icons/PHTag.vue';
+import VPLink from 'vitepress/dist/client/theme-default/components/VPLink.vue';
 
-interface PostInfo {
+export interface PostInfo {
   url: string;
   title: string;
   summary: string;
@@ -13,11 +14,7 @@ interface PostInfo {
   submitTime: string;
 }
 
-interface PostList {
-  posts: PostInfo[];
-}
-
-defineProps<PostList>();
+defineProps<{ posts: PostInfo[] }>();
 </script>
 
 <template>
@@ -42,7 +39,7 @@ defineProps<PostList>();
           <PHTag></PHTag>
           <template v-for="(tag, index) in post.tags" :key="tag">
             <span v-if="index > 0" class="ph-post__tag-divider">/</span>
-            <span>{{ tag }}</span>
+            <VPLink class="link" :href="`/tag?tag=${tag}`">{{ tag }}</VPLink>
           </template>
         </p>
       </div>

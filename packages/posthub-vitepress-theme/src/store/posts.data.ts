@@ -1,5 +1,6 @@
 import { createContentLoader } from 'vitepress';
-import { transformToRealURL } from '../../utils';
+import { transformToRealURL } from '../utils';
+import { type PostInfo } from '../components/layout/components/PHPostList.vue';
 
 export default createContentLoader('posts/**/*.md', {
   transform(raw) {
@@ -23,4 +24,4 @@ export default createContentLoader('posts/**/*.md', {
 // export const data = JSON.parse(${JSON.stringify(JSON.stringify(content))})`
 // 所以下面导出的 data 并不会被使用，这里仅仅是用来避免编辑器提示错误
 // See: https://vitepress.qzxdp.cn/guide/data-loading.html
-export const data = [];
+export const data: PostInfo[] = [];
