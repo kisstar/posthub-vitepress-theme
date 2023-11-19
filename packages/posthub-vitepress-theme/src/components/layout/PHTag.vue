@@ -1,17 +1,21 @@
 <script setup lang="ts">
+import { computed, type Ref } from 'vue';
 import { useData } from 'vitepress';
-import { getSearchParam } from '../../utils';
 import { postData as posts } from '../../store';
+import { useUrlSearchParams } from '../../hooks';
 import PHPostList from './components/PHPostList.vue';
 
 const { site } = useData();
 
-const tag = getSearchParam('tag');
-const tagPosts = posts.filter((post) => post.tags?.includes(tag));
+const params = useUrlSearchParams<Ref<{ tag?: string }>>();
+const tag = computed(() => params.value.tag || '');
+const tagPosts = computed(() =>
+  posts.filter((post) => post.tags?.includes(tag.value))
+);
 
 const themeConfig = site.value.themeConfig;
 const { tagInfo = {} } = themeConfig;
-const localTagInfo = tagInfo[tag];
+const localTagInfo = tagInfo[tag.value];
 </script>
 
 <template>

@@ -16,7 +16,15 @@ export function transformToRealURL(url: string) {
  * @param url URL 地址
  * @returns 返回参数字典对象
  */
-export function getSearchParams(url: string) {
+export function getSearchParams(url?: string) {
+  if (!url) {
+    if (!isClient) {
+      return {};
+    }
+
+    url = window.location.href;
+  }
+
   const searchParams = new URL(url).searchParams;
 
   const params = {};

@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import VPLink from 'vitepress/dist/client/theme-default/components/VPLink.vue';
 import PHTime from '../../icons/PHTime.vue';
 import PHTag from '../../icons/PHTag.vue';
-import VPLink from 'vitepress/dist/client/theme-default/components/VPLink.vue';
 
 export interface PostInfo {
   url: string;
