@@ -23,7 +23,7 @@ const tagList = Object.keys(tagInfo);
         v-for="(tagName, index) in tagList"
         :key="index"
       >
-        <VPLink class="link" :href="`/tag?tag=${tagName}`"></VPLink>
+        <VPLink :href="`/tag?tag=${tagName}`"></VPLink>
         <div class="ph-tags__item-overlay"></div>
         <div
           class="ph-tags__item-cover"
@@ -42,6 +42,8 @@ const tagList = Object.keys(tagInfo);
 </template>
 
 <style>
+@import '../../styles/vars.css';
+
 .ph-tags__container {
   margin: 0 auto;
   padding-right: 5vw;

@@ -3,10 +3,12 @@
 </template>
 
 <style>
+@import '../styles/vars.css';
+
 .ph-no-more__container {
   margin: 3rem auto;
   font-size: 14px;
-  color: var(--ph-tags-footer-text);
+  color: var(--ph-no-more-text);
   text-align: center;
 }
 </style>

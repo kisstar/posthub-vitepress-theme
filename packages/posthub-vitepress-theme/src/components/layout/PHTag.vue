@@ -33,6 +33,8 @@ const localTagInfo = tagInfo[tag.value];
 </template>
 
 <style>
+@import '../../styles/vars.css';
+
 .ph-tag__container {
   margin: 0 auto;
   padding-right: 5vw;

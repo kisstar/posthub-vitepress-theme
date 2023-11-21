@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { withBase } from 'vitepress';
+import VPLink from 'vitepress/dist/client/theme-default/components/VPLink.vue';
 import PHIcon from '../../icons/PHIcon.vue';
 
 interface AuthorInfoUrl {
@@ -16,7 +17,7 @@ interface AuthorInfo {
 }
 
 export interface FilterInfo {
-  categroyCount: number;
+  categoryCount: number;
   tagCount: number;
 }
 
@@ -37,16 +38,16 @@ defineProps<{ authorInfo: AuthorInfo; filterInfo: FilterInfo }>();
     <p class="ph-author__description">{{ authorInfo.description }}</p>
     <!-- 分类详情 -->
     <div class="ph-author__filter">
-      <button class="ph-author__categroy">
+      <VPLink class="ph-author__category" href="/categories">
         分类
         <br />
-        {{ filterInfo.categroyCount }}
-      </button>
-      <button class="ph-author__tag">
+        {{ filterInfo.categoryCount }}
+      </VPLink>
+      <VPLink class="ph-author__tag" href="/tags">
         标签
         <br />
         {{ filterInfo.tagCount }}
-      </button>
+      </VPLink>
     </div>
     <!-- 链接列表 -->
     <ul class="ph-author__urls">
@@ -63,6 +64,8 @@ defineProps<{ authorInfo: AuthorInfo; filterInfo: FilterInfo }>();
 </template>
 
 <style>
+@import '../../../styles/vars.css';
+
 .ph-author {
   position: sticky;
   top: 79px; /* 导航栏高度 + 侧边栏上外边距 */
@@ -91,7 +94,7 @@ defineProps<{ authorInfo: AuthorInfo; filterInfo: FilterInfo }>();
   border-bottom: 1px solid var(--ph-author-info-filter-border);
 }
 
-.ph-author__categroy,
+.ph-author__category,
 .ph-author__tag {
   text-align: center;
   font-size: 14px;

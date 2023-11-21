@@ -39,7 +39,7 @@ defineProps<{ posts: PostInfo[] }>();
           <PHTag></PHTag>
           <template v-for="(tag, index) in post.tags" :key="tag">
             <span v-if="index > 0" class="ph-post__tag-divider">/</span>
-            <VPLink class="link" :href="`/tag?tag=${tag}`">{{ tag }}</VPLink>
+            <VPLink :href="`/tag?tag=${tag}`">{{ tag }}</VPLink>
           </template>
         </p>
       </div>

@@ -46,6 +46,7 @@
  * -------------------------------------------------------------------------- */
 :root {
   --ph-tags-content-text: var(--vp-c-white);
+  --ph-tags-des-text: var(--vp-c-text-2);
 }
 
 /**

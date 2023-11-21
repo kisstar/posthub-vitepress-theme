@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import VPLink from 'vitepress/dist/client/theme-default/components/VPLink.vue';
 import { formatDate } from '../../../utils';
 import PHLocation from '../../icons/PHLocation.vue';
 import PHTime from '../../icons/PHTime.vue';
@@ -29,14 +30,9 @@ defineProps<{ postMeta: PostMeta }>();
     </div>
     <ul class="ph-post-meta__tags">
       <li v-for="tag in postMeta.tags" :key="tag" class="ph-post-meta__tag">
-        <!-- TODO: 提供标签跳转落地页
-        <a class="ph-post-meta__tag-item" href="javascript:void(0)">
-        {{ tag }}
-        </a>
-        -->
-        <span class="ph-post-meta__tag-item">
+        <VPLink class="ph-post-meta__tag-item" :href="`/tag?tag=${tag}`">
           {{ tag }}
-        </span>
+        </VPLink>
       </li>
     </ul>
   </div>

@@ -8,10 +8,10 @@ import { postData as posts } from '../../store';
 const { frontmatter, site } = useData();
 const filterInfo: ComputedRef<FilterInfo> = computed(() => {
   const themeConfig = site.value.themeConfig;
-  const { categroyInfo = {}, tagInfo = {} } = themeConfig;
+  const { categoryInfo = {}, tagInfo = {} } = themeConfig;
 
   return {
-    categroyCount: Object.keys(categroyInfo).length,
+    categoryCount: Object.keys(categoryInfo).length,
     tagCount: Object.keys(tagInfo).length,
   };
 });
