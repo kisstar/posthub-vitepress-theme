@@ -9,6 +9,7 @@ export interface PostInfo {
   summary: string;
   thumbnail: string;
   tags: string[];
+  categories: string[];
   author: string;
   location: string;
   submitTime: string;

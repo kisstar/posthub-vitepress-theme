@@ -39,7 +39,6 @@ const localTagInfo = tagInfo[tag.value];
   margin: 0 auto;
   padding-right: 5vw;
   padding-left: 5vw;
-  max-width: calc(750px + 10vw);
 }
 
 .ph-tag__title {
@@ -63,6 +62,7 @@ const localTagInfo = tagInfo[tag.value];
 }
 
 .ph-tag__section {
-  margin-bottom: 4rem;
+  margin: 0 auto 4rem;
+  max-width: var(--ph-layout-section-max-width);
 }
 </style>

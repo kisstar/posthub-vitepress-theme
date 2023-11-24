@@ -36,6 +36,7 @@ const filterInfo: ComputedRef<FilterInfo> = computed(() => {
 
 .ph-home__container {
   display: flex;
+  justify-content: center;
   margin: 0 auto;
   padding: 0 32px;
   max-width: var(--ph-layout-max-width);
@@ -50,5 +51,6 @@ const filterInfo: ComputedRef<FilterInfo> = computed(() => {
 
 .ph-home__section {
   flex: 1;
+  max-width: var(--ph-layout-section-max-width);
 }
 </style>

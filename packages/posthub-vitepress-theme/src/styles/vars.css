@@ -4,6 +4,7 @@
 :root {
   --ph-layout-max-width: var(--vp-layout-max-width);
   --ph-layout-aside-width: 278px;
+  --ph-layout-section-max-width: 1000px;
 }
 
 /**
@@ -54,4 +55,14 @@
  * -------------------------------------------------------------------------- */
 :root {
   --ph-tag-des-text: var(--vp-c-text-2);
+}
+
+/**
+ * Component: PHCategories
+ * -------------------------------------------------------------------------- */
+:root {
+  --ph-categories-nav-border: var(--vp-c-divider);
+  --ph-categories-title-text: var(--vp-c-text-2);
+  --ph-categories--title-hover-text: var(--vp-c-brand-1);
+  --ph-categories--title-active-text: var(--vp-c-brand-1);
 }
