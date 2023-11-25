@@ -29,5 +29,8 @@
   "bugs": {
     "url": "https://github.com/kisstar/posthub-vitepress-theme/issues"
   },
-  "author": "kisstar"
+  "author": "kisstar",
+  "dependencies": {
+    "@vueuse/core": "^10.6.1"
+  }
 }

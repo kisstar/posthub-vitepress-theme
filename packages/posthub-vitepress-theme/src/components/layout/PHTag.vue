@@ -1,17 +1,46 @@
 <script setup lang="ts">
-import { computed, type Ref } from 'vue';
+import { computed, onMounted, type Ref } from 'vue';
 import { useData } from 'vitepress';
+import { useLocalStorage } from '@vueuse/core';
 import { postData as posts } from '../../store';
-import { useUrlSearchParams } from '../../hooks';
+import { useUrlSearchParams, useTags } from '../../hooks';
+import { PH_RECENT_TAGS_KEY } from '../../constants';
+import { storage } from '../../utils';
+import { MAX_RECENT_TAGS } from '../../config';
 import PHPostList from './components/PHPostList.vue';
 
 const { site } = useData();
-
 const params = useUrlSearchParams<Ref<{ tag?: string }>>();
+const allTags = useTags();
+
 const tag = computed(() => params.value.tag || '');
 const tagPosts = computed(() =>
   posts.filter((post) => post.tags?.includes(tag.value))
 );
+
+onMounted(() => {
+  const recentTags = useLocalStorage<string[]>(PH_RECENT_TAGS_KEY, []);
+
+  // 如果当前标签不在所有标签中，则不记录
+  if (!tag.value || !allTags.includes(tag.value)) {
+    return;
+  }
+
+  const index = recentTags.value.indexOf(tag.value);
+
+  // 如果当前标签在最近标签中，则先删除
+  if (~index) {
+    recentTags.value.splice(index, 1);
+  }
+
+  recentTags.value = [tag.value, ...recentTags.value];
+
+  if (recentTags.value.length > MAX_RECENT_TAGS) {
+    recentTags.value.length = MAX_RECENT_TAGS;
+  }
+
+  storage.set(PH_RECENT_TAGS_KEY, recentTags.value);
+});
 
 const themeConfig = site.value.themeConfig;
 const { tagInfo = {} } = themeConfig;

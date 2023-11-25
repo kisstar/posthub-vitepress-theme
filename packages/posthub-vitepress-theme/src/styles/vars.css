@@ -46,8 +46,9 @@
  * Component: PHTags
  * -------------------------------------------------------------------------- */
 :root {
-  --ph-tags-content-text: var(--vp-c-white);
   --ph-tags-des-text: var(--vp-c-text-2);
+  --ph-tags-tag-text: var(--vp-code-color);
+  --ph-tags-tag-bg: var(--vp-code-bg);
 }
 
 /**
