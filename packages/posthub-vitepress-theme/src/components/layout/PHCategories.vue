@@ -7,11 +7,11 @@ import { postData as posts } from '../../store';
 import PHPostList from './components/PHPostList.vue';
 
 const params = useUrlSearchParams<Ref<{ category?: string }>>();
-const category = computed(() => params.value.category || '');
+const categoryKey = computed(() => params.value.category || '');
 const categoryPosts = computed(() => {
-  if (!category.value) return posts;
+  if (!categoryKey.value) return posts;
 
-  return posts.filter((post) => post.categories?.includes(category.value));
+  return posts.filter((post) => post.categoryKeys?.includes(categoryKey.value));
 });
 
 const { site } = useData();
@@ -57,7 +57,7 @@ const categoryList = Object.keys(categoryInfo);
   position: relative;
   margin-right: 20px;
   padding: 8px;
-  width: 180px;
+  width: 200px;
   font-size: 16px;
 }
 

@@ -1,56 +1,54 @@
 <script setup lang="ts">
 import { computed, onMounted, type Ref } from 'vue';
-import { useData } from 'vitepress';
 import { useLocalStorage } from '@vueuse/core';
 import { postData as posts } from '../../store';
-import { useUrlSearchParams, useTags } from '../../hooks';
+import { useUrlSearchParams, useTags, useTagInfo } from '../../hooks';
 import { PH_RECENT_TAGS_KEY } from '../../constants';
 import { storage } from '../../utils';
 import { MAX_RECENT_TAGS } from '../../config';
 import PHPostList from './components/PHPostList.vue';
 
-const { site } = useData();
 const params = useUrlSearchParams<Ref<{ tag?: string }>>();
+const tagInfo = useTagInfo();
 const allTags = useTags();
 
-const tag = computed(() => params.value.tag || '');
+const allTagKeys = allTags.map((tag) => tag.key);
+const tagKey = computed(() => params.value.tag || '');
 const tagPosts = computed(() =>
-  posts.filter((post) => post.tags?.includes(tag.value))
+  posts.filter((post) => post.tagKeys?.includes(tagKey.value))
 );
 
 onMounted(() => {
-  const recentTags = useLocalStorage<string[]>(PH_RECENT_TAGS_KEY, []);
+  const recentTagKeys = useLocalStorage<string[]>(PH_RECENT_TAGS_KEY, []);
 
   // 如果当前标签不在所有标签中，则不记录
-  if (!tag.value || !allTags.includes(tag.value)) {
+  if (!tagKey.value || !allTagKeys.includes(tagKey.value)) {
     return;
   }
 
-  const index = recentTags.value.indexOf(tag.value);
+  const index = recentTagKeys.value.indexOf(tagKey.value);
 
   // 如果当前标签在最近标签中，则先删除
   if (~index) {
-    recentTags.value.splice(index, 1);
+    recentTagKeys.value.splice(index, 1);
   }
 
-  recentTags.value = [tag.value, ...recentTags.value];
+  recentTagKeys.value = [tagKey.value, ...recentTagKeys.value];
 
-  if (recentTags.value.length > MAX_RECENT_TAGS) {
-    recentTags.value.length = MAX_RECENT_TAGS;
+  if (recentTagKeys.value.length > MAX_RECENT_TAGS) {
+    recentTagKeys.value.length = MAX_RECENT_TAGS;
   }
 
-  storage.set(PH_RECENT_TAGS_KEY, recentTags.value);
+  storage.set(PH_RECENT_TAGS_KEY, recentTagKeys.value);
 });
 
-const themeConfig = site.value.themeConfig;
-const { tagInfo = {} } = themeConfig;
-const localTagInfo = tagInfo[tag.value];
+const localTagInfo = tagInfo[tagKey.value];
 </script>
 
 <template>
   <div class="ph-tag__container">
     <div class="ph-tag__title">
-      <h3 class="ph-tag__name">{{ tag }} Tag</h3>
+      <h3 class="ph-tag__name">{{ localTagInfo?.name }} Tag</h3>
       <p class="ph-tag__description">
         {{ localTagInfo?.des }}
       </p>

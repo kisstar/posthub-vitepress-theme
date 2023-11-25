@@ -1,25 +1,33 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import VPLink from 'vitepress/dist/client/theme-default/components/VPLink.vue';
-import { useLocalStorage } from '@vueuse/core'
-import { PH_RECENT_TAGS_KEY } from '../../constants'
-import {useTags} from '../../hooks'
+import { useLocalStorage } from '@vueuse/core';
+import { PH_RECENT_TAGS_KEY } from '../../constants';
+import { useTags, useTagInfo } from '../../hooks';
+
+interface TagInfo {
+  key: string;
+  name: string;
+}
 
 interface TagBlock {
   title: string;
-  tags: string[];
+  tags: TagInfo[];
 }
 
-const recentTags = useLocalStorage(PH_RECENT_TAGS_KEY, []);
+const recentTagKeys = useLocalStorage(PH_RECENT_TAGS_KEY, []);
+const tagInfo = useTagInfo();
 const allTags = useTags();
 
 const tagBlocks = computed<TagBlock[]>(() => {
   const blocks: TagBlock[] = [];
 
-  if (recentTags.value.length > 0) {
+  if (recentTagKeys.value.length > 0) {
     blocks.push({
       title: '最近浏览',
-      tags: recentTags.value,
+      tags: recentTagKeys.value
+        .map((key) => ({ key, ...tagInfo[key] }))
+        .filter(Boolean),
     });
   }
   if (allTags.length > 0) {
@@ -46,11 +54,11 @@ const tagBlocks = computed<TagBlock[]>(() => {
       <div class="ph-tags__items">
         <div
           class="ph-tags__item"
-          v-for="(tagName, index) in block.tags"
+          v-for="(tag, index) in block.tags"
           :key="index"
         >
-          <VPLink :href="`/tag?tag=${tagName}`">
-            {{ tagName }}
+          <VPLink :href="`/tag?tag=${tag.key}`">
+            {{ tag.name }}
           </VPLink>
         </div>
       </div>

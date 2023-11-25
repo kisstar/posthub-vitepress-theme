@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import VPLink from 'vitepress/dist/client/theme-default/components/VPLink.vue';
 import { formatDate } from '../../../utils';
+import { useTagInfo } from '../../../hooks';
 import PHLocation from '../../icons/PHLocation.vue';
 import PHTime from '../../icons/PHTime.vue';
 
@@ -9,10 +10,12 @@ interface PostMeta {
   author: string;
   location: string;
   date: string;
-  tags: string[];
+  tagKeys: string[];
 }
 
 defineProps<{ postMeta: PostMeta }>();
+
+const tagInfo = useTagInfo();
 </script>
 
 <template>
@@ -29,9 +32,13 @@ defineProps<{ postMeta: PostMeta }>();
       </time>
     </div>
     <ul class="ph-post-meta__tags">
-      <li v-for="tag in postMeta.tags" :key="tag" class="ph-post-meta__tag">
-        <VPLink class="ph-post-meta__tag-item" :href="`/tag?tag=${tag}`">
-          {{ tag }}
+      <li
+        v-for="tagKey in postMeta.tagKeys"
+        :key="tagKey"
+        class="ph-post-meta__tag"
+      >
+        <VPLink class="ph-post-meta__tag-item" :href="`/tag?tag=${tagKey}`">
+          {{ tagInfo[tagKey].name }}
         </VPLink>
       </li>
     </ul>

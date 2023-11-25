@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import VPLink from 'vitepress/dist/client/theme-default/components/VPLink.vue';
+import { useTagInfo } from '../../../hooks';
 import PHTime from '../../icons/PHTime.vue';
 import PHTag from '../../icons/PHTag.vue';
 
@@ -8,14 +9,16 @@ export interface PostInfo {
   title: string;
   summary: string;
   thumbnail: string;
-  tags: string[];
-  categories: string[];
+  tagKeys: string[];
+  categoryKeys: string[];
   author: string;
   location: string;
   submitTime: string;
 }
 
 defineProps<{ posts: PostInfo[] }>();
+
+const tagInfo = useTagInfo();
 </script>
 
 <template>
@@ -38,9 +41,11 @@ defineProps<{ posts: PostInfo[] }>();
           <PHTime></PHTime>
           {{ post.author }} 发表于 {{ post.submitTime }}
           <PHTag></PHTag>
-          <template v-for="(tag, index) in post.tags" :key="tag">
+          <template v-for="(tagKey, index) in post.tagKeys" :key="tagKey">
             <span v-if="index > 0" class="ph-post__tag-divider">/</span>
-            <VPLink :href="`/tag?tag=${tag}`">{{ tag }}</VPLink>
+            <VPLink :href="`/tag?tag=${tagKey}`">
+              {{ tagInfo[tagKey].name }}
+            </VPLink>
           </template>
         </p>
       </div>
