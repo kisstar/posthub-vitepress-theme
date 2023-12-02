@@ -13,5 +13,7 @@ export default {
     ctx.app.component('ph_tags', PHTags);
     ctx.app.component('ph_tag', PHTag);
     ctx.app.component('ph_categories', PHCategories);
-  },
+  }
 };
+
+export type { Config } from './config/baseConfig.d.ts';
