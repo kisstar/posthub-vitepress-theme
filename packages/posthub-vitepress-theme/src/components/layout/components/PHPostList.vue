@@ -5,6 +5,7 @@ import PHTime from '../../icons/PHTime.vue';
 import PHTag from '../../icons/PHTag.vue';
 
 export interface PostInfo {
+  originUrl: string;
   url: string;
   title: string;
   summary: string;
@@ -14,6 +15,9 @@ export interface PostInfo {
   author: string;
   location: string;
   submitTime: string;
+  // 用于首页热门文章轮播图
+  banner?: string;
+  hot?: boolean;
 }
 
 defineProps<{ posts: PostInfo[] }>();

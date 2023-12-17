@@ -10,6 +10,7 @@ export default createContentLoader('posts/**/*.md', {
 
         return {
           ...frontmatter,
+          originUrl: url,
           url: transformToRealURL(url),
           timestamp: date.getTime(),
           submitTime: date.toLocaleDateString().replace(/\//g, '-'),

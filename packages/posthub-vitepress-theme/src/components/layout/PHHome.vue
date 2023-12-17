@@ -3,17 +3,23 @@ import { computed, type ComputedRef } from 'vue';
 import { useData } from 'vitepress';
 import PHAuthorInfo, { type FilterInfo } from './components/PHAuthorInfo.vue';
 import PHPostList from './components/PHPostList.vue';
-import { postData as posts } from '../../store';
+import { usePostList } from '../../hooks';
+import PHHotPosts from './components/PHHotPosts.vue';
 
 const { frontmatter, site } = useData();
+const posts = usePostList();
+
 const filterInfo: ComputedRef<FilterInfo> = computed(() => {
   const themeConfig = site.value.themeConfig;
   const { categoryInfo = {}, tagInfo = {} } = themeConfig;
 
   return {
     categoryCount: Object.keys(categoryInfo).length,
-    tagCount: Object.keys(tagInfo).length,
+    tagCount: Object.keys(tagInfo).length
   };
+});
+const hotPosts: ComputedRef = computed(() => {
+  return posts.filter((post) => post.hot);
 });
 </script>
 
@@ -26,6 +32,7 @@ const filterInfo: ComputedRef<FilterInfo> = computed(() => {
       ></PHAuthorInfo>
     </aside>
     <section class="ph-home__section">
+      <PHHotPosts :posts="hotPosts"></PHHotPosts>
       <PHPostList :posts="posts"></PHPostList>
     </section>
   </main>
@@ -36,6 +43,7 @@ const filterInfo: ComputedRef<FilterInfo> = computed(() => {
 
 .ph-home__container {
   display: flex;
+  flex-direction: row-reverse;
   justify-content: center;
   margin: 0 auto;
   padding: 0 32px;
@@ -45,7 +53,7 @@ const filterInfo: ComputedRef<FilterInfo> = computed(() => {
 .ph-home__aside {
   position: relative;
   margin-top: 1rem;
-  padding-right: 2rem;
+  padding-left: 2rem;
   width: var(--ph-layout-aside-width);
 }
 
