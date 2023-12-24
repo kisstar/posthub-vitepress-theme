@@ -3,7 +3,7 @@ import { computed, type ComputedRef } from 'vue';
 import { useData } from 'vitepress';
 import PHAuthorInfo, { type FilterInfo } from './components/PHAuthorInfo.vue';
 import PHPostList from './components/PHPostList.vue';
-import { usePostList } from '../../hooks';
+import { usePostList, useRenderPosts } from '../../hooks';
 import PHHotPosts from './components/PHHotPosts.vue';
 
 const { frontmatter, site } = useData();
@@ -21,6 +21,7 @@ const filterInfo: ComputedRef<FilterInfo> = computed(() => {
 const hotPosts: ComputedRef = computed(() => {
   return posts.filter((post) => post.hot);
 });
+const renderPosts = useRenderPosts();
 </script>
 
 <template>
@@ -33,7 +34,7 @@ const hotPosts: ComputedRef = computed(() => {
     </aside>
     <section class="ph-home__section">
       <PHHotPosts :posts="hotPosts"></PHHotPosts>
-      <PHPostList :posts="posts"></PHPostList>
+      <PHPostList :posts="renderPosts"></PHPostList>
     </section>
   </main>
 </template>

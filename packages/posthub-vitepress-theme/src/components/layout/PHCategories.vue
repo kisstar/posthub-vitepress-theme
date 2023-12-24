@@ -2,7 +2,7 @@
 import { computed, type Ref } from 'vue';
 import { useData } from 'vitepress';
 import VPLink from 'vitepress/dist/client/theme-default/components/VPLink.vue';
-import { useUrlSearchParams } from '../../hooks';
+import { useUrlSearchParams, useRenderPosts } from '../../hooks';
 import { postData as posts } from '../../store';
 import PHPostList from './components/PHPostList.vue';
 
@@ -13,6 +13,7 @@ const categoryPosts = computed(() => {
 
   return posts.filter((post) => post.categoryKeys?.includes(categoryKey.value));
 });
+const renderPosts = useRenderPosts(categoryPosts.value);
 
 const { site } = useData();
 const themeConfig = site.value.themeConfig;
@@ -37,7 +38,7 @@ const categoryList = Object.keys(categoryInfo);
       </div>
     </aside>
     <div class="ph-categories__section">
-      <PHPostList :posts="categoryPosts"></PHPostList>
+      <PHPostList :posts="renderPosts"></PHPostList>
     </div>
   </div>
 </template>

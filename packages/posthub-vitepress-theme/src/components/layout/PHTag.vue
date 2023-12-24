@@ -2,7 +2,12 @@
 import { computed, onMounted, type Ref } from 'vue';
 import { useLocalStorage } from '@vueuse/core';
 import { postData as posts } from '../../store';
-import { useUrlSearchParams, useTags, useTagInfo } from '../../hooks';
+import {
+  useUrlSearchParams,
+  useTags,
+  useTagInfo,
+  useRenderPosts
+} from '../../hooks';
 import { PH_RECENT_TAGS_KEY } from '../../constants';
 import { storage } from '../../utils';
 import { MAX_RECENT_TAGS } from '../../config';
@@ -17,6 +22,7 @@ const tagKey = computed(() => params.value.tag || '');
 const tagPosts = computed(() =>
   posts.filter((post) => post.tagKeys?.includes(tagKey.value))
 );
+const renderPosts = useRenderPosts(tagPosts.value);
 
 onMounted(() => {
   const recentTagKeys = useLocalStorage<string[]>(PH_RECENT_TAGS_KEY, []);
@@ -54,7 +60,7 @@ const localTagInfo = tagInfo[tagKey.value];
       </p>
     </div>
     <div class="ph-tag__section">
-      <PHPostList :posts="tagPosts"></PHPostList>
+      <PHPostList :posts="renderPosts"></PHPostList>
     </div>
   </div>
 </template>
