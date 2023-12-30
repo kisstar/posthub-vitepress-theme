@@ -5,6 +5,8 @@ import PHAuthorInfo, { type FilterInfo } from './components/PHAuthorInfo.vue';
 import PHPostList from './components/PHPostList.vue';
 import { usePostList, useRenderPosts } from '../../hooks';
 import PHHotPosts from './components/PHHotPosts.vue';
+import NoMore from '../base/NoMore.vue';
+import PHEmpty from '../base/PHEmpty.vue';
 
 const { frontmatter, site } = useData();
 const posts = usePostList();
@@ -35,6 +37,8 @@ const renderPosts = useRenderPosts();
     <section class="ph-home__section">
       <PHHotPosts :posts="hotPosts"></PHHotPosts>
       <PHPostList :posts="renderPosts"></PHPostList>
+      <NoMore v-if="!!renderPosts.length"></NoMore>
+      <PHEmpty v-if="!renderPosts.length"></PHEmpty>
     </section>
   </main>
 </template>

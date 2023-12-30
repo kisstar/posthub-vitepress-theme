@@ -4,6 +4,7 @@ import VPLink from 'vitepress/dist/client/theme-default/components/VPLink.vue';
 import { useLocalStorage } from '@vueuse/core';
 import { PH_RECENT_TAGS_KEY } from '../../constants';
 import { useTags, useTagInfo } from '../../hooks';
+import PHEmpty from '../base/PHEmpty.vue';
 
 interface TagInfo {
   key: string;
@@ -63,6 +64,7 @@ const tagBlocks = computed<TagBlock[]>(() => {
         </div>
       </div>
     </div>
+    <PHEmpty v-if="!allTags.length"></PHEmpty>
   </div>
 </template>
 

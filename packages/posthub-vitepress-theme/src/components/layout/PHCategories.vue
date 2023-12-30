@@ -5,6 +5,8 @@ import VPLink from 'vitepress/dist/client/theme-default/components/VPLink.vue';
 import { useUrlSearchParams, useRenderPosts } from '../../hooks';
 import { postData as posts } from '../../store';
 import PHPostList from './components/PHPostList.vue';
+import NoMore from '../base/NoMore.vue';
+import PHEmpty from '../base/PHEmpty.vue';
 
 const params = useUrlSearchParams<Ref<{ category?: string }>>();
 const categoryKey = computed(() => params.value.category || '');
@@ -39,6 +41,8 @@ const categoryList = Object.keys(categoryInfo);
     </aside>
     <div class="ph-categories__section">
       <PHPostList :posts="renderPosts"></PHPostList>
+      <NoMore v-if="!!renderPosts.length"></NoMore>
+      <PHEmpty v-if="!renderPosts.length"></PHEmpty>
     </div>
   </div>
 </template>
@@ -91,6 +95,7 @@ const categoryList = Object.keys(categoryInfo);
 }
 
 .ph-categories__section {
+  flex: 1;
   max-width: var(--ph-layout-section-max-width);
 }
 </style>

@@ -3,7 +3,7 @@
 </template>
 
 <style>
-@import '../styles/vars.css';
+@import '../../styles/vars.css';
 
 .ph-no-more__container {
   margin: 3rem auto;

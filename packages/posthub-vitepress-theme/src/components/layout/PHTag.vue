@@ -12,6 +12,8 @@ import { PH_RECENT_TAGS_KEY } from '../../constants';
 import { storage } from '../../utils';
 import { MAX_RECENT_TAGS } from '../../config';
 import PHPostList from './components/PHPostList.vue';
+import NoMore from '../base/NoMore.vue';
+import PHEmpty from '../base/PHEmpty.vue';
 
 const params = useUrlSearchParams<Ref<{ tag?: string }>>();
 const tagInfo = useTagInfo();
@@ -61,6 +63,8 @@ const localTagInfo = tagInfo[tagKey.value];
     </div>
     <div class="ph-tag__section">
       <PHPostList :posts="renderPosts"></PHPostList>
+      <NoMore v-if="!!renderPosts.length"></NoMore>
+      <PHEmpty v-if="!renderPosts.length"></PHEmpty>
     </div>
   </div>
 </template>

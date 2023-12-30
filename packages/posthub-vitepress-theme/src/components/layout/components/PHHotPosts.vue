@@ -52,7 +52,7 @@ register();
     }
 
     .ph-hot-post__item-mask {
-      background-color: rgba(0, 0, 0, 0.1);
+      background-color: rgba(255, 255, 255, 0.1);
     }
   }
 }
@@ -63,7 +63,6 @@ register();
   right: 0;
   top: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.3);
   z-index: 1;
   transition-duration: 0.3s;
   transition-property: all;
