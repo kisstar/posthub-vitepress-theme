@@ -15,7 +15,7 @@ const categoryPosts = computed(() => {
 
   return posts.filter((post) => post.categoryKeys?.includes(categoryKey.value));
 });
-const renderPosts = useRenderPosts(categoryPosts.value);
+const renderPosts = useRenderPosts(categoryPosts);
 
 const { site } = useData();
 const themeConfig = site.value.themeConfig;

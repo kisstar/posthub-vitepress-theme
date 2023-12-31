@@ -24,7 +24,7 @@ const tagKey = computed(() => params.value.tag || '');
 const tagPosts = computed(() =>
   posts.filter((post) => post.tagKeys?.includes(tagKey.value))
 );
-const renderPosts = useRenderPosts(tagPosts.value);
+const renderPosts = useRenderPosts(tagPosts);
 
 onMounted(() => {
   const recentTagKeys = useLocalStorage<string[]>(PH_RECENT_TAGS_KEY, []);
@@ -79,7 +79,7 @@ const localTagInfo = tagInfo[tagKey.value];
 }
 
 .ph-tag__title {
-  margin: 4rem auto;
+  padding: 4rem 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -99,7 +99,7 @@ const localTagInfo = tagInfo[tagKey.value];
 }
 
 .ph-tag__section {
-  margin: 0 auto 4rem;
+  margin: 0 auto;
   max-width: var(--ph-layout-section-max-width);
 }
 </style>

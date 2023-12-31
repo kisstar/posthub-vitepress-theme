@@ -1,14 +1,16 @@
-import { ref, computed, onMounted, onUnmounted } from 'vue';
+import { ref, computed, onMounted, onUnmounted, ComputedRef } from 'vue';
 import usePostList from './usePostList';
 import { type PostInfo } from '../components/layout/components/PHPostList.vue';
 
-export default (userPosts?: PostInfo[]) => {
-  const posts = userPosts || usePostList();
+export default (userPosts?: ComputedRef<PostInfo[]>) => {
+  const posts = computed(() => {
+    return userPosts?.value || usePostList();
+  });
   const cursor = ref(10);
   const renderPosts = computed(() => {
-    return posts.slice(
+    return posts.value.slice(
       0,
-      cursor.value > posts.length ? posts.length : cursor.value
+      cursor.value > posts.value.length ? posts.value.length : cursor.value
     );
   });
   const loadMore = () => {
@@ -19,8 +21,8 @@ export default (userPosts?: PostInfo[]) => {
       return;
     }
 
-    if (nextCursor >= posts.length) {
-      cursor.value = posts.length;
+    if (nextCursor >= posts.value.length) {
+      cursor.value = posts.value.length;
     } else {
       cursor.value = nextCursor;
     }

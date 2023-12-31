@@ -48,17 +48,23 @@ const renderPosts = useRenderPosts();
 
 .ph-home__container {
   display: flex;
-  flex-direction: row-reverse;
   justify-content: center;
   margin: 0 auto;
   padding: 0 32px;
   max-width: var(--ph-layout-max-width);
 }
 
+.ph-home__container.row-reverse {
+  flex-direction: row-reverse;
+}
+
+.ph-home__container.row-reverse .ph-home__aside {
+  padding-left: 2rem;
+}
+
 .ph-home__aside {
   position: relative;
   margin-top: 1rem;
-  padding-left: 2rem;
   width: var(--ph-layout-aside-width);
 }
 
