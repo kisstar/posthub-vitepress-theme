@@ -7,6 +7,9 @@ export default (userPosts?: ComputedRef<PostInfo[]>) => {
     return userPosts?.value || usePostList();
   });
   const cursor = ref(10);
+  const hasMore = computed(() => {
+    return cursor.value < posts.value.length;
+  });
   const renderPosts = computed(() => {
     return posts.value.slice(
       0,
@@ -36,5 +39,5 @@ export default (userPosts?: ComputedRef<PostInfo[]>) => {
     document.removeEventListener('scroll', loadMore);
   });
 
-  return renderPosts;
+  return { renderPosts, hasMore };
 };

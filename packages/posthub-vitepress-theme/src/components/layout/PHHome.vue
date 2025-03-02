@@ -23,7 +23,7 @@ const filterInfo: ComputedRef<FilterInfo> = computed(() => {
 const hotPosts: ComputedRef = computed(() => {
   return posts.filter((post) => post.hot);
 });
-const renderPosts = useRenderPosts();
+const { renderPosts, hasMore } = useRenderPosts();
 </script>
 
 <template>
@@ -37,7 +37,7 @@ const renderPosts = useRenderPosts();
     <section class="ph-home__section">
       <PHHotPosts :posts="hotPosts"></PHHotPosts>
       <PHPostList :posts="renderPosts"></PHPostList>
-      <NoMore v-if="!!renderPosts.length"></NoMore>
+      <NoMore v-if="!!renderPosts.length && !hasMore"></NoMore>
       <PHEmpty v-if="!renderPosts.length"></PHEmpty>
     </section>
   </main>

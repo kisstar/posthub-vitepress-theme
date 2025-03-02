@@ -24,7 +24,7 @@ const tagKey = computed(() => params.value.tag || '');
 const tagPosts = computed(() =>
   posts.filter((post) => post.tagKeys?.includes(tagKey.value))
 );
-const renderPosts = useRenderPosts(tagPosts);
+const { renderPosts, hasMore } = useRenderPosts(tagPosts);
 
 onMounted(() => {
   const recentTagKeys = useLocalStorage<string[]>(PH_RECENT_TAGS_KEY, []);
@@ -63,7 +63,7 @@ const localTagInfo = tagInfo[tagKey.value];
     </div>
     <div class="ph-tag__section">
       <PHPostList :posts="renderPosts"></PHPostList>
-      <NoMore v-if="!!renderPosts.length"></NoMore>
+      <NoMore v-if="!!renderPosts.length && !hasMore"></NoMore>
       <PHEmpty v-if="!renderPosts.length"></PHEmpty>
     </div>
   </div>

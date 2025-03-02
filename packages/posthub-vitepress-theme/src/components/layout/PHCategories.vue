@@ -15,7 +15,7 @@ const categoryPosts = computed(() => {
 
   return posts.filter((post) => post.categoryKeys?.includes(categoryKey.value));
 });
-const renderPosts = useRenderPosts(categoryPosts);
+const { renderPosts, hasMore } = useRenderPosts(categoryPosts);
 
 const { site } = useData();
 const themeConfig = site.value.themeConfig;
@@ -41,7 +41,7 @@ const categoryList = Object.keys(categoryInfo);
     </aside>
     <div class="ph-categories__section">
       <PHPostList :posts="renderPosts"></PHPostList>
-      <NoMore v-if="!!renderPosts.length"></NoMore>
+      <NoMore v-if="!!renderPosts.length && !hasMore"></NoMore>
       <PHEmpty v-if="!renderPosts.length"></PHEmpty>
     </div>
   </div>
