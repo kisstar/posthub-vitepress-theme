@@ -28,7 +28,7 @@ const { renderPosts, hasMore } = useRenderPosts();
 
 <template>
   <main class="ph-home__container">
-    <aside class="ph-home__aside">
+    <aside v-if="frontmatter.aside !== false" class="ph-home__aside">
       <PHAuthorInfo
         :author-info="frontmatter"
         :filter-info="filterInfo"
