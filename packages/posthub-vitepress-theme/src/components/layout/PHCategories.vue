@@ -5,7 +5,7 @@ import VPLink from 'vitepress/dist/client/theme-default/components/VPLink.vue';
 import { useUrlSearchParams, useRenderPosts } from '../../hooks';
 import { postData as posts } from '../../store';
 import PHPostList from './components/PHPostList.vue';
-import NoMore from '../base/NoMore.vue';
+import PHNoMore from '../base/PHNoMore.vue';
 import PHEmpty from '../base/PHEmpty.vue';
 
 const params = useUrlSearchParams<Ref<{ category?: string }>>();
@@ -41,7 +41,7 @@ const categoryList = Object.keys(categoryInfo);
     </aside>
     <div class="ph-categories__section">
       <PHPostList :posts="renderPosts"></PHPostList>
-      <NoMore v-if="!!renderPosts.length && !hasMore"></NoMore>
+      <PHNoMore v-if="!!renderPosts.length && !hasMore"></PHNoMore>
       <PHEmpty v-if="!renderPosts.length"></PHEmpty>
     </div>
   </div>
