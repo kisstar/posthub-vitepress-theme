@@ -12,7 +12,7 @@
         frameborder="0"
       ></iframe>
     </div>
-    <div class="ph-demo-preview__toolbar">
+    <div class="ph-demo-preview__toolbar" v-show="showToolbar">
       <button
         class="ph-demo-preview__toolbar-item"
         @click="togglePageFullscreen"
@@ -83,7 +83,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { onMounted, onUnmounted, ref } from 'vue';
 
 interface DemoPreviewProps {
   src?: string;
@@ -94,6 +94,7 @@ const props = defineProps<DemoPreviewProps>();
 
 const isPageFullscreen = ref(false);
 const isFullscreen = ref(false);
+const showToolbar = ref(false);
 const previewRef = ref<HTMLDivElement | null>(null);
 
 const togglePageFullscreen = () => {
@@ -122,12 +123,54 @@ const toggleFullscreen = () => {
   }
 };
 
-// 监听全屏状态变化
-document.addEventListener('fullscreenchange', () => {
+// 在预览区域内移动鼠标时，显示工具栏，并在停止移动 3 秒后隐藏
+let mouseMoveTimer: number | null = null;
+const handleMouseMove = (e: MouseEvent) => {
+  const previewRect = previewRef.value?.getBoundingClientRect();
+
+  // 判断鼠标是否在预览区域内
+  if (
+    previewRect &&
+    e.clientY > previewRect.top &&
+    e.clientY < previewRect.bottom &&
+    e.clientX > previewRect.left &&
+    e.clientX < previewRect.right
+  ) {
+    if (mouseMoveTimer) {
+      clearTimeout(mouseMoveTimer);
+      mouseMoveTimer = null;
+    }
+
+    showToolbar.value = true;
+    mouseMoveTimer = setTimeout(() => {
+      showToolbar.value = false;
+    }, 3000);
+  }
+};
+
+const handleFullscreenChange = () => {
   isFullscreen.value = document.fullscreenElement !== null;
 
   if (isFullscreen.value) {
     isPageFullscreen.value = false;
+  }
+};
+
+onMounted(() => {
+  // 监听全屏状态变化
+  document.addEventListener('fullscreenchange', handleFullscreenChange);
+  // 监听鼠标移动事件
+  window.addEventListener('mousemove', handleMouseMove);
+});
+
+onUnmounted(() => {
+  // 移除全屏状态变化监听
+  document.removeEventListener('fullscreenchange', handleFullscreenChange);
+  // 移除鼠标移动事件监听
+  window.removeEventListener('mousemove', handleMouseMove);
+  // 清除定时器
+  if (mouseMoveTimer) {
+    clearTimeout(mouseMoveTimer);
   }
 });
 </script>
@@ -136,6 +179,7 @@ document.addEventListener('fullscreenchange', () => {
 .ph-demo-preview {
   position: relative;
   width: 100%;
+  background: #fff;
 }
 
 .ph-demo-preview.page-fullscreen {
@@ -156,22 +200,18 @@ document.addEventListener('fullscreenchange', () => {
 .ph-demo-preview__content-iframe {
   width: 100%;
   height: 100%;
+  pointer-events: none; /* 禁止 iframe 捕获鼠标事件：iframe 元素默认会捕获鼠标事件，导致外部容器无法接收到鼠标移动事件 */
 }
 
 .ph-demo-preview__toolbar {
-  display: none;
+  display: flex;
+  flex-direction: column;
   position: absolute;
   top: 0;
   right: -72px;
   bottom: 0;
   padding: 24px;
   background-image: linear-gradient(to top right, transparent 0%, #eef1f5 100%);
-}
-
-/* 鼠标悬浮时显示工具栏 */
-.ph-demo-preview:hover .ph-demo-preview__toolbar {
-  display: flex;
-  flex-direction: column;
 }
 
 /* 全屏时调整工具栏的展示位置 */
