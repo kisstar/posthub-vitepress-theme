@@ -1,6 +1,6 @@
 import DefaultTheme from 'vitepress/theme';
 // global components
-import PHDemoPreview from './components/global/PHDemoPreview.vue';
+import PHDemoPreview from './components/global/demo-preview';
 // layout components
 import PHHome from './components/layout/PHHome.vue';
 import PHLayout from './components/layout/PHLayout.vue';
